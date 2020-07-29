@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 	"zproject/Conf_File_Monitor_Cli/conf"
 
@@ -73,13 +74,19 @@ func checkErr(str string, err error) {
 }
 
 func init() {
-	log = mlog.Newlog("info", "./logs/", "Config_Monitor_Client", "day=1")
 	//1.1加载配置文件
 	err := ini.MapTo(cfg, "./conf/config.ini")
 	if err != nil {
-		log.Error("init config faild,err:%v", err)
+		fmt.Printf("init config faild,err:%v", err)
 		return
 	}
+
+	//1.2初始化日志
+	tmp := strings.Split(cfg.LogConf.CutParameter, "|")
+	s := strings.Join(tmp, "=")
+	log = mlog.Newlog(cfg.LogConf.Level, cfg.LogConf.Florder, cfg.LogConf.Perfix, s)
+
+	//1.3获取本机IP
 	ip, err = mtools.GetOutboundIP()
 	if err != nil {
 		log.Error("get outbound ip faild,err:%v", err)

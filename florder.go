@@ -40,9 +40,9 @@ func getFlorderconf() {
 			err = json.Unmarshal([]byte(v), &flobj)
 			fconfs = append(fconfs, flobj)
 		}
-		log.Info("read florder conf success,%s", hc.Florderconf)
+		log.Info("get florder conf success,%s", hc.Florderconf)
 	} else {
-		log.Info("read florder conf null")
+		log.Info("get florder conf null")
 	}
 }
 

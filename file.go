@@ -42,9 +42,9 @@ func getFileconf() {
 			err = json.Unmarshal([]byte(v), &flobj)
 			confs = append(confs, flobj)
 		}
-		log.Info("read conf success,%s", hc.Fileconf)
+		log.Info("get file conf success,%s", hc.Fileconf)
 	} else {
-		log.Info("read conf null")
+		log.Info("get file conf null")
 	}
 }
 
